@@ -17,6 +17,11 @@
   height: 150px;
   background-size: contain;
   background-repeat: no-repeat;
+  cursor: pointer;
+}
+.text {
+  margin-top: 6px;
+  cursor: pointer;
 }
 .btns {
   margin-top: 24px;
