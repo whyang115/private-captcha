@@ -18,13 +18,18 @@ function App() {
   const [randstr, setStr] = useState('');
   const onOk = () => {
     const data = { ticket: value, randstr };
-    window.sendContent = () => {
-      if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
-        window.webkit.messageHandlers.Save.postMessage(data);
-      } else {
-        window.Android.Save(data);
-      }
-    };
+    if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
+      window.webkit.messageHandlers.Save.postMessage(data);
+    } else {
+      window.Android.Save(data);
+    }
+  };
+  const onClose = () => {
+    if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
+      window.webkit.messageHandlers.Save.postMessage();
+    } else {
+      window.Android.Save();
+    }
   };
   function getCaptcha() {
     const randstr = getStr();
@@ -61,7 +66,7 @@ function App() {
         看不清，换一张
       </div>
       <div className="btns">
-        <Button>取消</Button>
+        <Button onClick={onClose}>取消</Button>
         <Button type="primary" disabled={!value} onClick={onOk}>
           确认
         </Button>
