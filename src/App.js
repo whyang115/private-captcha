@@ -18,7 +18,6 @@ function App() {
   const [randstr, setStr] = useState('');
   const onOk = () => {
     const data = { ticket: value, randstr };
-    console.log(data);
     window.sendContent = () => {
       if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
         window.webkit.messageHandlers.Save.postMessage(data);
@@ -33,7 +32,7 @@ function App() {
     if (loading) return;
     setLoading(true);
     axios
-      .get('/oauth2/genImageCaptcha', { params: { randstr }, responseType: 'arraybuffer' })
+      .get('http://api.dev.mingdao.net/oauth2/genImageCaptcha', { params: { randstr }, responseType: 'arraybuffer' })
       .then(res => {
         const buffer = res.data;
         const blob = new Blob([buffer], { type: 'image/gif' });
