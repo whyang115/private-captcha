@@ -16,20 +16,25 @@ function App() {
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [randstr, setStr] = useState('');
+
   const onOk = () => {
-    const data = { ticket: value, randstr };
-    if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
-      window.webkit.messageHandlers.Save.postMessage(data);
-    } else {
-      window.Android.Save(data);
-    }
+    window.sendContent = () => {
+      const data = { ticket: value, randstr };
+      if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
+        window.webkit.messageHandlers.Save.postMessage(data);
+      } else {
+        window.Android.Save(data);
+      }
+    };
   };
   const onClose = () => {
-    if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
-      window.webkit.messageHandlers.Save.postMessage();
-    } else {
-      window.Android.Save();
-    }
+    window.sendContent = () => {
+      if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
+        window.webkit.messageHandlers.Save.postMessage();
+      } else {
+        window.Android.Save();
+      }
+    };
   };
   function getCaptcha() {
     const randstr = getStr();
