@@ -27,9 +27,9 @@ function App() {
   };
   const onClose = () => {
     if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
-      window.webkit.messageHandlers.Save.postMessage();
+      window.webkit.messageHandlers.Save.postMessage('');
     } else {
-      window.Android.Save();
+      window.Android.Save('');
     }
   };
   function getCaptcha() {
