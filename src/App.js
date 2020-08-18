@@ -22,7 +22,7 @@ function App() {
     if (get(window, ['webkit', 'messageHandlers', 'Save', 'postMessage'])) {
       window.webkit.messageHandlers.Save.postMessage(data);
     } else {
-      window.Android.Save(data);
+      window.Android.Save(JSON.stringify(data));
     }
   };
   const onClose = () => {
