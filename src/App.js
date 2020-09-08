@@ -16,7 +16,7 @@ function App() {
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [randstr, setStr] = useState('');
-  const [url, setUrl] = useState('http://api.dev.mingdao.net/oauth2/genImageCaptcha');
+  const [url, setUrl] = useState('');
 
   window.getPara = url => {
     setUrl(url);
@@ -38,6 +38,7 @@ function App() {
     }
   };
   function getCaptcha() {
+    if (!url) return;
     const randstr = getStr();
     setStr(randstr);
     if (loading) return;
@@ -58,9 +59,11 @@ function App() {
         setLoading(false);
       });
   }
+
   useEffect(() => {
     getCaptcha();
   }, [url]);
+
   return (
     <div className="App">
       <div className="title">{'请输入验证码'}</div>
