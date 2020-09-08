@@ -16,6 +16,11 @@ function App() {
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [randstr, setStr] = useState('');
+  const [url, setUrl] = useState('http://api.dev.mingdao.net/oauth2/genImageCaptcha');
+
+  window.getPara = url => {
+    setUrl(url);
+  };
 
   const onOk = () => {
     const data = { ticket: value, randstr };
@@ -38,7 +43,7 @@ function App() {
     if (loading) return;
     setLoading(true);
     axios
-      .get('http://api.dev.mingdao.net/oauth2/genImageCaptcha', { params: { randstr }, responseType: 'arraybuffer' })
+      .get(url, { params: { randstr }, responseType: 'arraybuffer' })
       .then(res => {
         const buffer = res.data;
         const blob = new Blob([buffer], { type: 'image/gif' });
@@ -55,7 +60,7 @@ function App() {
   }
   useEffect(() => {
     getCaptcha();
-  }, []);
+  }, [url]);
   return (
     <div className="App">
       <div className="title">{'请输入验证码'}</div>
