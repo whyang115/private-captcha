@@ -44,7 +44,7 @@ function App() {
     if (loading) return;
     setLoading(true);
     axios
-      .get(url, { params: { randstr }, responseType: 'arraybuffer' })
+      .get(url, { params: { randstr, width: 500, height: 80, fontSize: 50 }, responseType: 'arraybuffer' })
       .then(res => {
         const buffer = res.data;
         const blob = new Blob([buffer], { type: 'image/gif' });
