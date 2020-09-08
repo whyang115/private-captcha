@@ -46,14 +46,15 @@ function App() {
     axios
       .get(url, { params: { randstr, width: 500, height: 80, fontSize: 50 }, responseType: 'arraybuffer' })
       .then(res => {
-        const buffer = res.data;
-        const blob = new Blob([buffer], { type: 'image/gif' });
-        const file = new FileReader();
-        file.onload = e => {
-          const base64 = e.target.result;
-          setData(base64);
-        };
-        file.readAsDataURL(blob);
+        // const buffer = res.data;
+        // const blob = new Blob([buffer], { type: 'image/gif' });
+        // const file = new FileReader();
+        // file.onload = e => {
+        //   const base64 = e.target.result;
+        //   setData(base64);
+        // };
+        // file.readAsDataURL(blob);
+        setData(res);
       })
       .finally(() => {
         setLoading(false);
@@ -68,7 +69,8 @@ function App() {
     <div className="App">
       <div className="title">{'请输入验证码'}</div>
       <Input value={value} onChange={e => setValue(e.target.value)} />
-      <div className="imgWrap" onClick={getCaptcha} style={{ backgroundImage: `url(${data})` }}>
+      <div className="imgWrap" onClick={getCaptcha}>
+        <img alt="captcha" src={data}></img>
         {loading && <Spin size="large" />}
       </div>
       <div className="text" onClick={getCaptcha}>

@@ -19,6 +19,11 @@
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+.imgWrap img {
+  width: auto;
+  height: 150px;
+}
 .text {
   margin-top: 6px;
   cursor: pointer;
