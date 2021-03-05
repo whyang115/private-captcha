@@ -2,6 +2,7 @@
 
 .App {
   padding: 24px;
+  overflow: hidden;
 }
 
 .title {

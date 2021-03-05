@@ -6,6 +6,7 @@ import { get } from 'lodash';
 const getStr = () => {
   return Math.random().toString(16).slice(2);
 };
+
 function App() {
   const [value, setValue] = useState('');
   const [randstr, setStr] = useState('');
